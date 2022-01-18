@@ -1,0 +1,29 @@
+{%extends "base.html"%}
+{% load static %}
+{%block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="{%static 'css/about.css' %}">
+</head>
+<body>
+    <div id="container">
+        <div id="text-container">
+            <h2>About</h2>
+            <p>
+                MyBank is provide best saving account with more interest compare to other bank. 
+                Easy way to open bank Account in our bank.
+            </p>
+        </div>
+        <div id="image-container">
+            <img src="{%static 'images/about_pic.jpg' %}" alt="saving picture">
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock content %}

@@ -1,0 +1,65 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(209, 199, 181);
+}
+
+nav{
+    background: rgb(247, 119, 27);
+    height: 80px;
+    width: 100%;
+}
+
+label.logo{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+
+nav ul{
+    float: right;
+    margin-right: 20px;
+    text-align: center;
+}
+nav li{
+    float: left;
+    padding: 30px 50px;
+    
+}
+#you{
+    display: block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    padding: 3px;
+    margin: 15px 5px;
+    background-color: white;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+table, td, th {
+    border: 1px solid black;
+  }
+  
+table {
+    width: 70%;
+    border-collapse: collapse;
+}
+
+#table_container{
+    display: block;
+    margin: auto;
+    text-align: center;
+    width: fit-content;
+    border:  1px solid bla;
+}

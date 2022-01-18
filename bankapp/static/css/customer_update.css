@@ -1,0 +1,100 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(209, 199, 181);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav{
+    background: rgb(247, 119, 27);
+    height: 80px;
+    width: 100%;
+}
+
+label.logo{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+
+nav ul{
+    float: right;
+    margin-right: 20px;
+    text-align: center;
+}
+nav li{
+    float: left;
+    padding: 30px 50px;
+    
+}
+#you{
+    display: block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    padding: 3px;
+    margin: 15px 5px;
+    background-color: white;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+
+}
+.container {
+    display: block;
+    padding: 20px;
+    background-color: white;
+    height: fit-content;
+    width: 500px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+  
+  input{
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+  
+  .update_button {
+    background-color: #f08f10;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+  
+  .registerbtn:hover {
+    opacity: 1;
+  }
+  a {
+    color: dodgerblue;
+  }
+
+
+
+

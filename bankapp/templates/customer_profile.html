@@ -1,0 +1,92 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyBank</title>
+    <link rel="stylesheet" href="{% static 'css/customer_profile.css'%}">
+</head>
+<body>
+    <nav>
+        <label class="logo">MyBank</label>
+        <ul>
+            <li>Welcome, {{customer.email}}</li>
+            <li id="you">You</li>
+        </ul>
+    </nav>
+    <div id="container">
+        <div id="deatails_container">
+            <center><img src="{%static 'images/profile_pic.png'%}" alt="Profile"></center>
+            <ul>
+                <li>Account Number : {{customer.account_number}}</li>
+                <li>Name : {{customer.customer_name}}</li>
+                <li>Date of Birth : {{customer.dob}}</li>
+                <li>Father Name : {{customer.father_name}}</li>
+                <li>Mobile : {{customer.mobile}}</li>
+                <li>Balance : {{customer.balance}}</li>
+            </ul>
+            <a id="update_link" href="{%url 'customer_update' %}">UPDATE</a>
+            <a id="logout_link" href="{%url 'logout' %}">LOGOUT</a>
+        </div>
+        <div id="transaction_container">
+            <div id="benificiary_container">
+                <p>Hi You can add your benificiary account here!!</p>
+                <button id="add_benificiary_button" onclick="formVisible()">add benificiary</button>
+                
+                <a href="{% url 'benificiary_edit' %}"><button id="edit_benificiary_button">Edit benificiary</button></a>
+                <div id="benificiary_form_container">
+                    <form  action="add_benificiary" method="POST" onsubmit= "return benificiaryValidate()">
+                        {% csrf_token %}
+                        <ul>
+                            <li>Account holder Name : <input id="name" type="text" name="benificiary_name" required></li>
+                            <li>Nick name for holder   : <input id="nick" type="text" name="benificiary_nickname" required></li>
+                            <li>Account Number &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <input type="number" min="0" id="benificiary_acc" name="benificiary_acc" required></li>
+                            <br>  
+                        </ul>
+                        <button type="submit" id="benificiary_button">Add Account</button>
+                    </form>
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if 'benificiary' in message.extra_tags %}
+                                <b style="color: red;">{{message}}</b>
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        <br>  
+                </div>
+            </div>
+            <p>Hi You can transfer money Here!!</p>
+            <div id="transfer_container">
+                <form method="POST" action="transfer">
+                    {% csrf_token %}
+                    <ul>
+                        <li><label for="select_account">Choose Account &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; : </label>
+                            <select onchange="setAccountNumber()" name="reciever_acc" id="select" size="2" style="width:160px;">
+                                {% for account in benificiary %}
+                                <option value="{{account.account_number}}">{{account.nick_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </li>
+                        <li>Account Number &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; : <textarea id="accountnumber" cols="19" rows="1" readonly></textarea></li>
+                        <li>Enter Amount to Transfer : <input type="number" min="1" name="amount" required></li>
+                        {% if messages %}
+                        {% for message in messages %}
+                            {% if 'transfer' in message.extra_tags %}
+                                <b style="color: red;">{{message}}</b>
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        <br>  
+                    </ul>
+                    <button type="submit" id="transferbtn">Transfer</button>
+                </form>
+            
+            </div>
+        </div>
+    </div>
+</body>
+<script src="{%static 'JS/customer_profile.js' %}"></script>
+
+</html>

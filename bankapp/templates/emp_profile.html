@@ -1,0 +1,61 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Profile</title>
+    <link rel="stylesheet" href="{% static 'css/emp_profile.css'%}">
+</head>
+<body>
+    <nav>
+        <label class="logo">MyBank</label>
+        <ul>
+            <li>Welcome, {{employee.employee_email}}</li>
+            <li id="you">You</li>
+        </ul>
+    </nav>
+    <div id="container">
+        <div id="details_container">
+            <form method="POST" action="view_customer" onsubmit="return validateAccountNum()">
+                {% csrf_token %}
+                <span>Account Number :<input type="text" id="account_num" name="account_num"></span>
+                <button type="submit">View Details</button>
+            </form>
+            {% if messages %}
+            {% for message in messages %}
+            <b style="color: rgb(126, 5, 5);">{{message}}</b>
+            {% endfor %}
+            {% endif %}
+            {% if request.session.account_number%}
+            <div id="deatails_container">
+                <ul>
+                    <li>Account Number : {{customer.account_number}}</li>
+                    <li>Name : {{customer.customer_name}}</li>
+                    <li>Date of Birth : {{customer.dob}}</li>
+                    <li>Father Name : {{customer.father_name}}</li>
+                    <li>Mobile : {{customer.mobile}}</li>
+                    <li>Balance : {{customer.balance}}</li>
+                </ul>
+            </div>
+            {%endif%}
+            <a style="float: right;" href="{% url 'logout' %}">LOGOUT</a>
+        </div>
+        <div id="withdraw_deposit_contailner">
+            <div id="form_container">
+                <form method="POST" action="transaction" onsubmit="return validateAccountNumber()">
+                    {% csrf_token %}
+                    <ul>
+                        <li><span> Account Number : <input id="account_number" name="account_num" type="text" required></span></li>
+                        <li><span style="float: right;">Amount : <input name="amount" type="text" required></span></li>
+                        <li><button id="deposit" type="submit" name="action" value="deposit">Deposit</button>
+                        <button id="withdraw" type="submit" name="action" value="withdraw">Withdraw</button></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="{%static 'JS/employee_profile.js' %}"></script>
+</html>

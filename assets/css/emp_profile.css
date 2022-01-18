@@ -1,0 +1,96 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(209, 199, 181);
+}
+
+nav{
+    background: rgb(247, 119, 27);
+    height: 80px;
+    width: 100%;
+}
+
+label.logo{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+
+nav ul{
+    float: right;
+    margin-right: 20px;
+    text-align: center;
+}
+nav li{
+    float: left;
+    padding: 30px 50px;
+    
+}
+#you{
+    display: block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    padding: 3px;
+    margin: 15px 5px;
+    background-color: white;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+#container{
+    display: flex;
+    flex-direction: row;
+
+}
+#details_container{
+    height: 100vh;
+    width: 40%;
+    background-color: rgb(175, 197, 167);
+    text-align: center;
+}
+#details_container *{
+    margin: 20px;
+}
+
+#withdraw_deposit_contailner{
+    height: 100vh;
+    width: 60%;
+    background-color: burlywood;
+    text-align: center;
+}
+
+#withdraw_deposit_contailner ul{
+    margin-top: 100px;
+    border: 2px solid black;
+    height: 150px;
+}
+
+#withdraw_deposit_contailner ul li{
+    padding: 10px;
+}
+#form_container{
+    height: fit-content;
+    width: fit-content;
+    padding: 5px;
+    display: block;
+    margin: auto;
+}
+
+#withdraw{
+    float: left;
+    margin-top: 20px;
+}
+#deposit{
+    float: right;
+    margin-top: 20px;
+}

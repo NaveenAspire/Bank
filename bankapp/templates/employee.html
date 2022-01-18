@@ -1,0 +1,38 @@
+{%extends "base.html"%}
+{% load static %}
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee</title>
+  <link rel="stylesheet" href="{%static 'css/login.css' %}">
+</head>
+<body>
+  <form method="POST"> 
+    {%csrf_token%}
+    <div class="container">
+      <h1>Login</h1><br>
+      <p>Please fill details to login as Employee.</p>
+      <hr>
+
+      <label for="employee_email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Your E-mail id" name="email" required>
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+      {% if messages %}
+      {% for message in messages %}
+      <b style="color: red;">{{message}}</b>
+      {% endfor %}
+      {% endif %}
+      <br>
+      <button id="login" type="submit">Login</button>
+      </div>
+  </form>
+</body>
+
+</html>
+{%endblock content %}
+

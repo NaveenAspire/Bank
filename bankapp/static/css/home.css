@@ -1,0 +1,18 @@
+body{
+    background-image: url('/static/images/background_image.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: calc(100vh);
+}
+#welcome h2,p{
+    color: whitesmoke;
+    font-size: 60px;
+}
+
+#welcome{
+    display: block;
+    height: 300px;
+    width: 300px;
+    margin-left: 950px;
+    margin-top: 150px;
+}

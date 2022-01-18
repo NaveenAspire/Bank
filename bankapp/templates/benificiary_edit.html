@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyBank</title>
+    <link rel="stylesheet" href="{%static 'css/benificiary_edit.css'%}">
+</head>
+<body>
+    <nav>
+        <label class="logo">MyBank</label>
+        <ul>
+            <li>Welcome, {{context.customer.email}}</li>
+            <li id="you">You</li>
+        </ul>
+    </nav>
+    <a id="back_button" href="customer_profile"><button>Goto Profile</button></a>
+    <div id="table_container">
+        <table>
+            <tr>
+                <td>Name</td>
+                <td>Nick Name</td>
+                <td>Account Number</td>
+            </tr>
+            {% for benificiary in context.benificiary %}
+            <tr>
+                <td>{{benificiary.name}}</td>
+                <td>{{benificiary.nick_name}}</td>
+                <td>{{benificiary.account_number}}</td>
+                <td><form id="myForm" action="remove_benificary" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" name="action" value="{{benificiary.account_number}}" onclick="removeBenificiary()">Remove</button>
+                </form></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+<script src="{%static 'JS/customer_profile.js' %}"></script>
+
+</html>
