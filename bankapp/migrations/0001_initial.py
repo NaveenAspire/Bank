@@ -7,41 +7,64 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Benificiary',
+            name="Benificiary",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=20)),
-                ('nick_name', models.CharField(max_length=20)),
-                ('account_number', models.CharField(max_length=11)),
-                ('customer_account', models.CharField(max_length=11)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=20)),
+                ("nick_name", models.CharField(max_length=20)),
+                ("account_number", models.CharField(max_length=11)),
+                ("customer_account", models.CharField(max_length=11)),
             ],
         ),
         migrations.CreateModel(
-            name='Employee',
+            name="Employee",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('employee_name', models.CharField(max_length=20)),
-                ('employee_email', models.EmailField(max_length=254)),
-                ('password', models.CharField(max_length=15)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("employee_name", models.CharField(max_length=20)),
+                ("employee_email", models.EmailField(max_length=254)),
+                ("password", models.CharField(max_length=15)),
             ],
         ),
         migrations.CreateModel(
-            name='NewUser',
+            name="NewUser",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('user_name', models.CharField(max_length=20)),
-                ('account_number', models.CharField(max_length=11)),
-                ('father_name', models.CharField(max_length=20)),
-                ('email', models.EmailField(max_length=254)),
-                ('mobile', models.CharField(max_length=10)),
-                ('dob', models.DateField()),
-                ('balance', models.IntegerField()),
-                ('password', models.CharField(max_length=15)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("user_name", models.CharField(max_length=20)),
+                ("account_number", models.CharField(max_length=11)),
+                ("father_name", models.CharField(max_length=20)),
+                ("email", models.EmailField(max_length=254)),
+                ("mobile", models.CharField(max_length=10)),
+                ("dob", models.DateField()),
+                ("balance", models.IntegerField()),
+                ("password", models.CharField(max_length=15)),
             ],
         ),
     ]

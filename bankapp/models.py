@@ -12,10 +12,10 @@ class Customer_Profile(models.Model):
     mobile = models.CharField(max_length=10)
     dob = models.DateField()
     balance = models.IntegerField()
-    
 
     def __str__(self):
         return self.account_number
+
 
 class Employee_Profile(models.Model):
     employee = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -26,6 +26,7 @@ class Employee_Profile(models.Model):
     def __str__(self):
         return self.employee_email
 
+
 class Benificiary(models.Model):
     name = models.CharField(max_length=20)
     nick_name = models.CharField(max_length=20)
@@ -34,4 +35,3 @@ class Benificiary(models.Model):
 
     def __str__(self):
         return self.nick_name
-
