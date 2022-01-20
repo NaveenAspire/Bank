@@ -1,31 +1,36 @@
+"""This module has django views"""
 from django.contrib import messages
-from django.http.response import HttpResponse, HttpResponseRedirect
-from bankapp.models import Benificiary, Customer_Profile, Employee_Profile
-from bankapp.account import Account
-from django.contrib.auth.models import User, Group
-from django.shortcuts import redirect, render
-from django.contrib import auth
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import make_password
 from django.db.transaction import (
     atomic,
     savepoint,
     savepoint_commit,
     savepoint_rollback,
 )
+from django.contrib import auth
+from django.contrib.auth.models import User, Group
+from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+from bankapp.models import Benificiary, Customer_Profile, Employee_Profile
+from bankapp.account import Account
 
 # Create your views here.
 
-
+"""This is home view for app"""
 def home(request):
+    """This is home view for app"""
+
     return render(request, "home.html")
 
-
+"""This is about view for app"""
 def about(request):
+    """This is about view for app"""
+
     return render(request, "about.html")
 
-
 def customer_register(request):
+    """This is customer registration page view"""
+
     if request.method != "POST":
         return render(request, "customer_register.html")
     customer_name = request.POST.get("name")
@@ -59,8 +64,9 @@ def customer_register(request):
     user.save()
     return render(request, "customer.html")
 
-
 def customer(request):
+    """This is customer login view"""
+
     print("Test")
     if request.user.is_authenticated:
         return redirect("customer_profile")
@@ -78,8 +84,9 @@ def customer(request):
     except Exception as e:
         pass
 
-
 def password_reset(request):
+    """This is password reset view for customer"""
+
     if request.method != "POST":
         return render(request, "password_reset.html")
     try:
@@ -101,9 +108,10 @@ def password_reset(request):
         messages.info(request, "Username does not exist!")
         return render(request, "password_reset.html")
 
-
 @login_required(login_url="customer")
 def customer_profile(request):
+    """This is customer profile view"""
+
     try:
         print("So sad")
         customer = Customer_Profile.objects.get(customer_id=request.user.id)
@@ -116,8 +124,9 @@ def customer_profile(request):
         auth.logout(request)
         return redirect("customer")
 
-
 def employee(request):
+    """This is employee login view"""
+
     if request.method != "POST":
         return render(request, "employee.html")
     print(request.POST.get("psw"))
@@ -132,9 +141,10 @@ def employee(request):
     print(request.user.groups.all()[0])
     return redirect("emp_profile")
 
-
 @login_required(login_url="employee")
 def emp_profile(request):
+    """This is employee profile view"""
+
     try:
         emp = Employee_Profile.objects.get(employee_id=request.user.id)
         return render(request, "emp_profile.html", {"employee": emp})
@@ -143,10 +153,11 @@ def emp_profile(request):
         auth.logout(request)
         return redirect("customer")
 
-
 @login_required(login_url="customer")
 @atomic
 def transfer(request):
+    """This is transaction view for customer"""
+
     if request.method != "POST":
         return redirect("customer_profile")
     reciever_acc = request.POST["reciever_acc"]
@@ -173,9 +184,10 @@ def transfer(request):
         messages.info(request, "Account Number Not Exist..", extra_tags="transfer")
         return redirect("customer_profile")
 
-
 @login_required(login_url="customer")
 def customer_update(request):
+    """This is customer profile update view"""
+
     customer = Customer_Profile.objects.get(customer_id=request.user.id)
     if request.method != "POST":
         return render(request, "customer_update.html")
@@ -190,11 +202,13 @@ def customer_update(request):
     customer.save()
     return redirect("customer_profile")
 
-
 @login_required(login_url="employee")
 def view_customer(request):
+    """This is view customers by employee view"""
+
     if request.method != "POST":
         return redirect("emp_profile")
+        
     account_number = request.POST["account_num"]
     if Customer_Profile.objects.filter(account_number=account_number).exists():
         request.session["account_number"] = account_number
@@ -208,9 +222,10 @@ def view_customer(request):
         messages.info(request, "Account Number Not Exist")
         return redirect("emp_profile")
 
-
 @login_required(login_url="employee")
 def transaction(request):
+    """This is transaction view for employee"""
+
     if request.method != "POST":
         return redirect("emp_profile")
     account_number = request.POST["account_num"]
@@ -229,11 +244,10 @@ def transaction(request):
                 return redirect("emp_profile")
     return redirect("emp_profile")
 
-
-login_required(login_url="customer")
-
-
+@login_required(login_url="customer")
 def add_benificiary(request):
+    """This is add benificiary account by customer view"""
+
     if request.method != "POST":
         return redirect("customer_profile")
     customer = Customer_Profile.objects.get(customer_id=request.user.id)
@@ -253,9 +267,10 @@ def add_benificiary(request):
         messages.info(request, "Account Number Not exist..", extra_tags="benificiary")
         return redirect("customer_profile")
 
-
 @login_required(login_url="customer")
 def benificiary_edit(request):
+    """This view used for manage the benificiary accounts by customer"""
+
     customer = Customer_Profile.objects.get(customer_id=request.user.id)
     benificiary = Benificiary.objects.all().filter(
         customer_account=customer.account_number
@@ -263,16 +278,18 @@ def benificiary_edit(request):
     context = {"benificiary": benificiary, "customer": customer}
     return render(request, "benificiary_edit.html", {"context": context})
 
-
 @login_required(login_url="customer")
 def remove_benificary(request):
+    """This vies used for remove the benificiary by customer"""
+
     if request.method != "POST":
         return redirect("benificiary_edit")
     Benificiary.objects.filter(account_number=request.POST["action"]).delete()
     return redirect("benificiary_edit")
 
-
 def logout_view(request):
+    """This view used for logout customer"""
+
     auth.logout(request)
     request.session.flush()
     return redirect("/")
