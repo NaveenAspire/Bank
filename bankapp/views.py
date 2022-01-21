@@ -16,13 +16,11 @@ from bankapp.account import Account
 
 # Create your views here.
 
-"""This is home view for app"""
 def home(request):
     """This is home view for app"""
 
     return render(request, "home.html")
 
-"""This is about view for app"""
 def about(request):
     """This is about view for app"""
 
@@ -64,7 +62,7 @@ def customer_register(request):
     user.save()
     return render(request, "customer.html")
 
-def customer(request):
+def customer_login(request):
     """This is customer login view"""
 
     print("Test")
@@ -80,7 +78,7 @@ def customer(request):
             auth.login(request, user)
             return redirect("customer_profile")
         messages.info(request, "Username or Password Invalid..")
-        return redirect("customer")
+        return redirect("customer_login")
     except Exception as e:
         pass
 
@@ -103,12 +101,12 @@ def password_reset(request):
         user.password = make_password(new_password)
         user.save()
         messages.info(request, "Passwaord Changed!")
-        return redirect("customer")
+        return redirect("customer_login")
     except:
         messages.info(request, "Username does not exist!")
         return render(request, "password_reset.html")
 
-@login_required(login_url="customer")
+@login_required(login_url="customer_login")
 def customer_profile(request):
     """This is customer profile view"""
 
@@ -122,7 +120,7 @@ def customer_profile(request):
         return render(request, "customer_profile.html", context)
     except:
         auth.logout(request)
-        return redirect("customer")
+        return redirect("customer_login")
 
 def employee(request):
     """This is employee login view"""
@@ -151,9 +149,9 @@ def emp_profile(request):
     except Exception as e:
         messages.info(request, "Username or Password Invalid..")
         auth.logout(request)
-        return redirect("customer")
+        return redirect("employee")
 
-@login_required(login_url="customer")
+@login_required(login_url="customer_login")
 @atomic
 def transfer(request):
     """This is transaction view for customer"""
@@ -184,7 +182,7 @@ def transfer(request):
         messages.info(request, "Account Number Not Exist..", extra_tags="transfer")
         return redirect("customer_profile")
 
-@login_required(login_url="customer")
+@login_required(login_url="customer_login")
 def customer_update(request):
     """This is customer profile update view"""
 
@@ -244,7 +242,7 @@ def transaction(request):
                 return redirect("emp_profile")
     return redirect("emp_profile")
 
-@login_required(login_url="customer")
+@login_required(login_url="customer_login")
 def add_benificiary(request):
     """This is add benificiary account by customer view"""
 
@@ -267,7 +265,7 @@ def add_benificiary(request):
         messages.info(request, "Account Number Not exist..", extra_tags="benificiary")
         return redirect("customer_profile")
 
-@login_required(login_url="customer")
+@login_required(login_url="customer_login")
 def benificiary_edit(request):
     """This view used for manage the benificiary accounts by customer"""
 
@@ -278,7 +276,7 @@ def benificiary_edit(request):
     context = {"benificiary": benificiary, "customer": customer}
     return render(request, "benificiary_edit.html", {"context": context})
 
-@login_required(login_url="customer")
+@login_required(login_url="customer_login")
 def remove_benificary(request):
     """This vies used for remove the benificiary by customer"""
 
